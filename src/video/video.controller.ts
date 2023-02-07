@@ -1,4 +1,15 @@
-import { Body, Controller, Get, Param, Post, Res, StreamableFile, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Param,
+  Post,
+  Res,
+  StreamableFile,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { VideoService } from './video.service';
@@ -26,12 +37,22 @@ export class VideoController {
   }
 
   @Get(':id/play')
-  async play(@Param('id') id: string, @Res({ passthrough: true }) res: Response): Promise<StreamableFile> {
-    const { stream, mimetype, size } = await this.videoService.play(id);
+  async play(
+    @Headers('Sec-Fetch-Dest') setFetchDest: 'document' | 'video',
+    @Param('id') id: string,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<StreamableFile> {
+    const { stream, mimetype, size } = await this.videoService.play(id, setFetchDest);
     res.set({
       'Content-Length': size,
       'Content-Type': mimetype,
+      // attachment인 경우 호출을 한번만 하게 되지만 비디오를 다운로드 하게 됨
+      // 'Content-Disposition': 'attachment;',
     });
-    return stream;
+    // return stream;
+    return new StreamableFile(stream);
+
+    // const file = createReadStream(join(process.cwd(), 'package.json'));
+    // return new StreamableFile(file);
   }
 }

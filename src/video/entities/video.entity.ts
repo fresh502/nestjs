@@ -1,8 +1,8 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Analytics } from 'src/analytics/entities/analytics.entity';
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Video {
-  // @PrimaryGeneratedColumn({ type: 'uuid' })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -17,4 +17,7 @@ export class Video {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToOne(() => Analytics, (analytics) => analytics.video)
+  analytics: Analytics;
 }
