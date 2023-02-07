@@ -20,7 +20,7 @@ $ psql -U nestjs -h localhost -p 5433
 ### 파일 업로드
 
 - https://docs.nestjs.com/techniques/file-upload
-- 환경변수에 따라 localStorage, S3Storage 활용 가능할듯
+- 환경변수에 따라 localStorage, S3Storage 활용 가능
 
 ```bash
 # 업로드 요청
@@ -31,3 +31,7 @@ $ curl -X 'POST' \
   -F 'video=@1.mp4;type=video/mp4' \
   -F 'title=test'
 ```
+
+### Transaction
+
+- 비디오 업로드시 DB와 파일쓰기를 트랜잭션으로 묶기
