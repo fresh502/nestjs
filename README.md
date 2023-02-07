@@ -16,3 +16,18 @@ $ createuser -d -P -U postgres -h localhost -p 5433 nestjs
 $ createdb -U nestjs -h localhost -p 5433 -E UTF8 nestjs
 $ psql -U nestjs -h localhost -p 5433
 ```
+
+### 파일 업로드
+
+- https://docs.nestjs.com/techniques/file-upload
+- 환경변수에 따라 localStorage, S3Storage 활용 가능할듯
+
+```bash
+# 업로드 요청
+$ curl -X 'POST' \
+  'http://localhost:3000/videos' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'video=@1.mp4;type=video/mp4' \
+  -F 'title=test'
+```
