@@ -1,43 +1,36 @@
 # NestJS Project
 
-## 참고 자료
+## 프로젝트 아키텍쳐
 
-### 도커로 Postgres 구동 및 볼률 설정
+- 응집도 높은 모듈 설계
+- 프로덕트 레벨의 서버 사이드 기능 구현
+- Github Actions를 활용한 운영 환경 배포
+  ![Alt text](./diagram/img/architecture.svg?raw=true)
 
-- https://medium.com/@basit26374/how-to-run-postgresql-in-docker-container-with-volume-bound-c141f94e4c5a
+## 실습 내용
 
-```bash
-$ docker pull postgres:14.6
-$ docker volume create nestjs-project-postgres
-$ docker volume ls
-$ docker run --name nestjs_project_postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -p 5433:5432 -v nestjs-project-postgres:/var/lib/postgresql/data -d postgres:14.6
+- 회원가입 및 로그인, 비디오 업로드 및 재생 API 작성
+- Decorator 활용
+- Provider 활용
+- Module 활용
+- 슬라이딩 세션과 리프레쉬 토큰을 활용하여 인증 과정 디벨롭
+- Authorizaion 구현
+- Interceptor를 활용한 요청, 응답 매핑
+- TypeORM을 활용하여 Transaction, Index 구현
+- 쿼리 분석 및 개선
+- 운영 환경을 대비한 DB 마이그레이션
+- Task 스케쥴링을 활용한 메일 전송
+- 에러 발생시 슬랙 알람 전송
+- 테스트 케이스 작성
+- Github Actions를 활용한 CD
+  ![Alt text](./diagram/img/sequence.svg?raw=true)
 
-$ createuser -d -P -U postgres -h localhost -p 5433 nestjs
-$ createdb -U nestjs -h localhost -p 5433 -E UTF8 nestjs
-$ psql -U nestjs -h localhost -p 5433
-```
+## 기술 스택
 
-### 파일 업로드
-
-- https://docs.nestjs.com/techniques/file-upload
-- 환경변수에 따라 localStorage, S3Storage 활용 가능
-
-```bash
-# 업로드 요청
-$ curl -X 'POST' \
-  'http://localhost:3000/videos' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'video=@1.mp4;type=video/mp4' \
-  -F 'title=test'
-```
-
-### Transaction
-
-- 비디오 업로드시 DB와 파일쓰기를 트랜잭션으로 묶기
-
-### viewCnt 처리
-
-- 웹브라우저에서 바로 재생하는 방식으로 할 경우 두번 호출됨
-- Header의 Sec-Fetch-Dest의 값을 기준으로 viewCnt 업데이트 처리
-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest
+- Typescript 4.7.4
+- Node.js 18.14.0
+- NestJS 9.0.0
+- Postgres 14.6
+- AWS EC2
+- Docker
+- Git, Github

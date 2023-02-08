@@ -1,0 +1,13 @@
+direction: right
+
+client: Client
+
+server: NestJS Server {
+  user: User 모듈
+}
+
+postgres.shape: cylinder
+
+client -> server: Auth API
+
+server.user -> postgres

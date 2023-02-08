@@ -1,0 +1,18 @@
+direction: right
+
+client: Client
+
+server: NestJS Server {
+  video: Video 모듈
+  analytics: Analytics 모듈
+}
+
+postgres.shape: cylinder
+
+client -> server: upload, play, search API
+
+server.video -> server.analytics: change view count
+
+server.video -> postgres
+
+server.analytics -> postgres

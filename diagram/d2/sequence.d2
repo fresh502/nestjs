@@ -1,0 +1,23 @@
+shape: sequence_diagram
+
+client: Client
+server: NestJS Server
+db: DB
+email: 외부 Email
+slack: Slack
+
+API: {
+  client.message -> server.message: request
+  server.message -> db.message -> server.message
+  server.message -> client.message: response
+}
+
+Task Scheduling: {
+  server.task -> db.task -> server.task
+  server.task -> email: send
+  server
+}
+
+error occured: {
+  server -> slack: alarm
+}

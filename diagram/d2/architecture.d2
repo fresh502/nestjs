@@ -1,0 +1,37 @@
+direction: right
+
+client: Client
+
+ec2: AWS EC2 {
+  server: NestJS Server {
+    user: User 모듈
+    video: Video 모듈
+    analytics: Analytics 모듈
+    email: Email 모듈
+  }
+
+  postgres.shape: cylinder
+}
+
+client -> ec2.server: API
+
+ec2.server.user -> ec2.postgres
+ec2.server.video -> ec2.postgres
+ec2.server.analytics -> ec2.postgres
+
+github: Github {
+  shape: image
+  icon: https://icons.terrastruct.com/dev%2Fgithub.svg
+}
+
+email: 외부 Email
+
+ec2.server.email -> email: send
+
+slack: Slack
+
+ec2.server -> slack: alarm
+
+developer -> github: git push
+github -> github actions: trigger
+github actions -> ec2.Server: Deploy

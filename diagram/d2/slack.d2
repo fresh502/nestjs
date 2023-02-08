@@ -1,0 +1,12 @@
+direction: right
+
+server: NestJS Server {
+  user: User 모듈
+  video: Video 모듈
+  analytics: Analytics 모듈
+  email: Email 모듈
+}
+
+slack: Slack
+
+server -> slack: 에러 발생시 알람 전송
