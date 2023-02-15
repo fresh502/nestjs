@@ -18,6 +18,7 @@ import { VideoModule } from './video/video.module';
       database: 'nestjs',
       entities: [Video, Analytics],
       synchronize: true,
+      logging: true,
     }),
     VideoModule,
     AnalyticsModule,

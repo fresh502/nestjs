@@ -39,9 +39,11 @@ export class VideoService {
     const video = await this.videoRepository.findOneBy({ id });
     if (!video) throw new NotFoundException();
 
-    if (setFetchDest === 'video') {
-      await this.analyticsService.addViewCnt(id);
-    }
+    // todo video로 계속 간다면 좀 더 직관적인 파라미터 사용 및 조사 필요
+    // if (setFetchDest === 'video') {
+    //   await this.analyticsService.addViewCnt(id);
+    // }
+    await this.analyticsService.addViewCnt(id);
 
     const { mimetype } = video;
     const extension = mimetype.split('/')[1];

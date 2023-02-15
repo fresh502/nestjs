@@ -41,3 +41,11 @@ $ curl -X 'POST' \
 - 웹브라우저에서 바로 재생하는 방식으로 할 경우 두번 호출됨
 - Header의 Sec-Fetch-Dest의 값을 기준으로 viewCnt 업데이트 처리
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest
+
+```bash
+$ curl -X 'GET' 'http://localhost:3000/videos/0cce6d2a-0e0e-4727-95eb-165879b20860/play' --output /dev/null \
+& curl -X 'GET' 'http://localhost:3000/videos/0cce6d2a-0e0e-4727-95eb-165879b20860/play' --output /dev/null \
+& curl -X 'GET' 'http://localhost:3000/videos/0cce6d2a-0e0e-4727-95eb-165879b20860/play' --output /dev/null \
+& curl -X 'GET' 'http://localhost:3000/videos/0cce6d2a-0e0e-4727-95eb-165879b20860/play' --output /dev/null \
+& curl -X 'GET' 'http://localhost:3000/videos/0cce6d2a-0e0e-4727-95eb-165879b20860/play' --output /dev/null
+```
