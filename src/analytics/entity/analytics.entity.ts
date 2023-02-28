@@ -1,9 +1,9 @@
-import { Video } from 'src/video/entities/video.entity';
+import { Video } from 'src/video/entity/video.entity';
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Analytics {
-  @PrimaryColumn({ name: 'video_id' })
+  @PrimaryColumn({ type: 'uuid', name: 'video_id' })
   videoId: string;
 
   @Column({ name: 'view_cnt', default: 0 })

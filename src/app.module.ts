@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnalyticsModule } from './analytics/analytics.module';
-import { Analytics } from './analytics/entities/analytics.entity';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { Video } from './video/entities/video.entity';
+import { MemberModule } from './member/member.module';
 import { VideoModule } from './video/video.module';
 
 @Module({
@@ -16,14 +13,13 @@ import { VideoModule } from './video/video.module';
       username: 'nestjs',
       password: 'nestjs',
       database: 'nestjs',
-      entities: [Video, Analytics],
+      autoLoadEntities: true,
       synchronize: true,
       logging: true,
     }),
     VideoModule,
     AnalyticsModule,
+    MemberModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

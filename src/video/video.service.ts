@@ -5,7 +5,7 @@ import { stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { AnalyticsService } from 'src/analytics/analytics.service';
 import { Repository } from 'typeorm';
-import { Video } from './entities/video.entity';
+import { Video } from './entity/video.entity';
 
 @Injectable()
 export class VideoService {
