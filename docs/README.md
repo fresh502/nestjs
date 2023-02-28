@@ -7,10 +7,10 @@
 - https://medium.com/@basit26374/how-to-run-postgresql-in-docker-container-with-volume-bound-c141f94e4c5a
 
 ```bash
-$ docker pull postgres:14.6
+$ docker pull postgres:14.7
 $ docker volume create nestjs-project-postgres
 $ docker volume ls
-$ docker run --name nestjs_project_postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -p 5433:5432 -v nestjs-project-postgres:/var/lib/postgresql/data -d postgres:14.6
+$ docker run --name nestjs_project_postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -p 5433:5432 -v nestjs-project-postgres:/var/lib/postgresql/data -d postgres:14.7
 
 $ createuser -d -P -U postgres -h localhost -p 5433 nestjs
 $ createdb -U nestjs -h localhost -p 5433 -E UTF8 nestjs
