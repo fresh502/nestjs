@@ -22,7 +22,6 @@ export class VideoController {
 
   @Post()
   @UseInterceptors(FileInterceptor('video'))
-  // TODO Headers 필요한 것만 뽑아낼 수 있는 커스텀 데코레이터?
   create(@UploadedFile() { mimetype, originalname, buffer }: Express.Multer.File, @Body('title') title: string) {
     const extension = originalname.split('.')[1];
     return this.videoService.create(title, mimetype, extension, buffer);

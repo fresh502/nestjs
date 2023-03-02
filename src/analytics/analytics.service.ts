@@ -18,7 +18,7 @@ export class AnalyticsService {
     return analytics;
   }
 
-  // TODO 동시성 처리
+  // completed. 동시성 처리
   async addViewCnt(id: string) {
     // let analytics = await this.analyticsRepository.findOneBy({ videoId: id });
     // if (!analytics) {

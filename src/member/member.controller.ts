@@ -9,7 +9,6 @@ export class MemberController {
   constructor(private readonly memberService: MemberService) {}
 
   @Post()
-  // TODO Headers 필요한 것만 뽑아낼 수 있는 커스텀 데코레이터?
   create(@Body() createMemberDto: CreateMemberDto) {
     return this.memberService.create(createMemberDto);
   }
