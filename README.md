@@ -1,4 +1,5 @@
 # NestJS Project
+- https://github.com/fresh502/nestjs
 
 ## 프로젝트 아키텍쳐
 
@@ -9,12 +10,13 @@
 
 ## 실습 내용
 
-- 회원가입 및 로그인, 비디오 업로드 및 재생 API 작성
+- 회원가입 및 로그인
+- 슬라이딩 세션과 리프레쉬 토큰을 활용하여 인증 과정 디벨롭
+- Authorizaion 구현
+- 비디오 업로드 및 재생, 데이터 확인 API 작성
 - Decorator 활용
 - Provider 활용
 - Module 활용
-- 슬라이딩 세션과 리프레쉬 토큰을 활용하여 인증 과정 디벨롭
-- Authorizaion 구현
 - Interceptor를 활용한 요청, 응답 매핑
 - TypeORM을 활용하여 Transaction, Index 구현
 - 쿼리 분석 및 개선
@@ -34,3 +36,17 @@
 - AWS EC2
 - Docker
 - Git, Github
+
+## Postgres 도커
+```bash
+$ docker pull postgres:14.7
+$ docker volume create nestjs-project-postgres
+$ docker volume ls
+$ docker run --name nestjs_project_postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -p 5433:5432 -v nestjs-project-postgres:/var/lib/postgresql/data -d postgres:14.7
+
+$ createuser -d -P -U postgres -h localhost -p 5433 nestjs
+$ createdb -U nestjs -h localhost -p 5433 -E UTF8 nestjs
+$ psql -U nestjs -h localhost -p 5433
+```
+
+
