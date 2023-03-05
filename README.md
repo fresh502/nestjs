@@ -1,22 +1,5 @@
 # NestJS 심화
 
-## chapter-1
-
-### Github
-- https://github.com/fresh502/nestjs
-
-### 명령어
-```bash
-$ git clone https://github.com/fresh502/nestjs.git
-$ npm i
-```
-
-### 챕터별 브랜치
-- ch-{number}
-```bash
-$ git switch ch-1
-```
-
 ## 프로젝트 아키텍쳐
 
 - 응집도 높은 모듈 설계
