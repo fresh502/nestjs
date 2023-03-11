@@ -65,9 +65,13 @@ $ docker run --name nestjs -e POSTGRES_USER=nestjs -e POSTGRES_PASSWORD=nestjs -
 # 컨테이너 확인
 $ docker ps --all
 
-# Postgres에 psql로 접속
+# 로컬호스트에서 Postgres에 psql로 바로 접속
 $ psql -U nestjs -h localhost -p 5433
 
+# 실행중인 도커 컨테이너에서 프로세스 실행. 셸을 실행해서 인터렉티브한 환경에서 컨테이너 환경을 탐색하는 것도 가능
+# docker exec -it <CONTAINER_ID> <COMMAND>
+$ docker exec -it <CONTAINER_ID> psql -U nestjs
+
 # 컨테이너 중지 및 삭제
-$ docker rm ${CONTAINER ID}
+$ docker rm <CONTAINER_ID>
 ```
