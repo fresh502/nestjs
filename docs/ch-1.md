@@ -73,5 +73,6 @@ $ psql -U nestjs -h localhost -p 5433
 $ docker exec -it <CONTAINER_ID> psql -U nestjs
 
 # 컨테이너 중지 및 삭제
+$ docker stop <CONTAINER_ID>
 $ docker rm <CONTAINER_ID>
 ```
