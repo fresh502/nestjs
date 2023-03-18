@@ -15,8 +15,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { VideoService } from './video.service';
 
-@ApiTags('video')
-@Controller('videos')
+@ApiTags('Video')
+@Controller('api/videos')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 

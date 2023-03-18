@@ -4,7 +4,7 @@ import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
 export class CreateMemberDto {
   @ApiProperty()
-  // @Transform((params) => params.value.trim())
+  @Transform((params) => params.value.trim())
   @IsString()
   @MinLength(2)
   @MaxLength(20)
@@ -30,6 +30,7 @@ export class CreateMemberDto {
   // /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/
   // Please translate the above into Korean
   @ApiProperty()
+  // @NotIncludeNickname()
   @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/)
   readonly password: string;
 }

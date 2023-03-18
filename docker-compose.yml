@@ -1,0 +1,20 @@
+version: '3.1'
+
+volumes:
+  postgres_data:
+
+
+services:
+  postgres:
+    image: postgres:14.7
+    container_name: postgres
+    # 5432로 포워딩 할 경우 host os 에 설치된 postgre와 겹칠 수 있으므로 host에 설치된 postgre를 내려야함
+    ports:
+      - '5434:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always

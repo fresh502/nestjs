@@ -6,18 +6,35 @@ import { Member } from './entity/member.entity';
 
 @Injectable()
 export class MemberService {
-  constructor(@InjectRepository(Member) private readonly memberRepository: Repository<Member>) {}
+  private readonly members = [
+    {
+      id: '1',
+      nickname: 'john',
+      password: 'changeme',
+    },
+    {
+      id: '2',
+      nickname: 'maria',
+      password: 'guess',
+    },
+  ];
+
+  constructor(
+    @InjectRepository(Member)
+    private readonly memberRepository: Repository<Member>,
+  ) {}
 
   async create({ nickname, password }: CreateMemberDto) {
     const member = await this.memberRepository.save(this.memberRepository.create({ nickname, password }));
     return member;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findOneByNickname(nickname: string) {
+    return this.members.find((member) => member.nickname === nickname);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    console.log(id);
+    return this.members.find((member) => member.id === id);
   }
 }
