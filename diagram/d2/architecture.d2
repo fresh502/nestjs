@@ -4,6 +4,7 @@ client: Client
 
 ec2: AWS EC2 {
   server: NestJS Server {
+    auth: Auth 모듈
     user: User 모듈
     video: Video 모듈
     analytics: Analytics 모듈
@@ -15,6 +16,7 @@ ec2: AWS EC2 {
 
 client -> ec2.server: API
 
+ec2.server.auth -> ec2.postgres
 ec2.server.user -> ec2.postgres
 ec2.server.video -> ec2.postgres
 ec2.server.analytics -> ec2.postgres

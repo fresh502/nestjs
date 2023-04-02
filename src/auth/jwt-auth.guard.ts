@@ -1,8 +1,4 @@
-import {
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
@@ -30,9 +26,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
     const http = context.switchToHttp();
     const { params } = http.getRequest<Request>();
-    const memberIdFromParams = params['memberId'];
+    const userIdFromParams = params['userId'];
 
-    if (memberIdFromParams && user.id !== memberIdFromParams) {
+    if (userIdFromParams && user.id !== userIdFromParams) {
       throw new UnauthorizedException('Invalid JWT');
     }
 

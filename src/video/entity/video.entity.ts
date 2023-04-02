@@ -1,5 +1,5 @@
 import { Analytics } from 'src/analytics/entity/analytics.entity';
-import { Member } from 'src/member/entity/member.entity';
+import { User } from 'src/user/entity/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -31,7 +31,7 @@ export class Video {
   @OneToOne(() => Analytics, (analytics) => analytics.video)
   analytics: Analytics;
 
-  @ManyToOne(() => Member, (user) => user.videos)
+  @ManyToOne(() => User, (user) => user.videos)
   @JoinColumn({ name: 'user_id' })
-  user: Member;
+  user: User;
 }
