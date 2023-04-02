@@ -4,11 +4,11 @@ import { AuthService } from './auth.service';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorator/public.decorator';
 import { ApiPostResponse } from 'src/common/decorator/swagger.decorator';
-import { SignupResDto } from './dto/res.dto';
-import { SignupReqDto } from './dto/req.dto';
+import { SigninResDto, SignupResDto } from './dto/res.dto';
+import { SigninReqDto, SignupReqDto } from './dto/req.dto';
 
 @ApiTags('Auth')
-@ApiExtraModels(SignupResDto)
+@ApiExtraModels(SignupResDto, SigninResDto)
 @Controller('api/auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -23,10 +23,10 @@ export class AuthController {
   }
 
   @Public()
-  @ApiPostResponse(SignupResDto)
+  @ApiPostResponse(SigninResDto)
   @UseGuards(LocalAuthGuard)
   @Post('signin')
-  async signin(@Request() req) {
+  async signin(@Request() req, @Body() _: SigninReqDto): Promise<SigninResDto> {
     return this.authService.signin(req.user);
   }
 }

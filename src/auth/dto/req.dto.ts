@@ -16,19 +16,18 @@ export class SignupReqDto {
   // /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/
   // Please translate the above into Korean
   // @NotIncludeNickname()
-  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/)
   @ApiProperty({ required: true, example: 'Password1!' })
   @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/)
   passwordConfirm: string;
 }
 
 export class SigninReqDto {
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: true, example: 'nestjs@fastcampus.com' })
   @IsEmail()
   @MaxLength(30)
   email: string;
 
-  @ApiProperty({ required: true })
-  @MaxLength(30)
+  @ApiProperty({ required: true, example: 'Password1!' })
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{10,30}$/)
   password: string;
 }
