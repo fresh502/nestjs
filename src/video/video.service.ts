@@ -3,20 +3,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { createReadStream, ReadStream } from 'node:fs';
 import { stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { AnalyticsService } from 'src/analytics/analytics.service';
 import { DataSource, Repository } from 'typeorm';
 import { Video } from './entity/video.entity';
 import { User } from 'src/user/entity/user.entity';
-import { Analytics } from 'src/analytics/entity/analytics.entity';
 
 @Injectable()
 export class VideoService {
   constructor(
-    private analyticsService: AnalyticsService,
     private dataSource: DataSource,
     @InjectRepository(Video) private videoRepository: Repository<Video>,
     @InjectRepository(User) private userRepository: Repository<User>,
-    @InjectRepository(Analytics) private analyticsRepository: Repository<Analytics>,
   ) {}
 
   async create(userId: string, title: string, mimetype: string, extension: string, buffer: Buffer): Promise<Video> {
@@ -25,7 +21,6 @@ export class VideoService {
     try {
       const user = await this.userRepository.findOneBy({ id: userId });
       const video = await this.videoRepository.save(this.videoRepository.create({ title, mimetype, user }));
-      await this.analyticsRepository.save(this.analyticsRepository.create({ video }));
       await this.uploadVideo(video.id, extension, buffer);
       await queryRunner.commitTransaction();
       return video;
@@ -52,7 +47,7 @@ export class VideoService {
     const video = await this.videoRepository.findOneBy({ id });
     if (!video) throw new NotFoundException('No video');
 
-    await this.analyticsService.addDownloadCnt(id);
+    await this.videoRepository.update({ id }, { downloadCnt: () => 'download_cnt + 1' });
 
     const { mimetype } = video;
     const extension = mimetype.split('/')[1];

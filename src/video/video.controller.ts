@@ -62,20 +62,20 @@ export class VideoController {
     return CreateVideoResDto.toDto(video);
   }
 
-  @Get()
   @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetItemsResponse(FindVideoResDto)
+  @Get()
   @UseGuards(JwtAuthGuard)
   async findAll(@Query() { page, size }: PageReqDto): Promise<{ items: FindVideoResDto[] }> {
     const videos = await this.videoService.findAll(page, size);
     return { items: videos.map((video) => FindVideoResDto.toDto(video)) };
   }
 
-  @Get(':id')
   @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetResponse(FindVideoResDto)
+  @Get(':id')
   @UseGuards(JwtAuthGuard)
   async findOne(@Param() { id }: FindVideoReqDto) {
     const video = await this.videoService.findOne(id);

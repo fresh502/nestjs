@@ -13,7 +13,7 @@ import { FindUserReqDto } from './dto/req.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({ description: '유저 리스트' })
+  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetItemsResponse(FindUserResDto)
   @UseGuards(JwtAuthGuard)
@@ -23,7 +23,7 @@ export class UserController {
     return { items: users.map((user) => FindUserResDto.toDto(user)) };
   }
 
-  @ApiOperation({ description: '유저' })
+  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetResponse(FindUserResDto)
   @UseGuards(JwtAuthGuard)
