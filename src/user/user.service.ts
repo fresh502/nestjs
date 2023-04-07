@@ -7,8 +7,9 @@ import { User } from './entity/user.entity';
 export class UserService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
-  async findAll() {
-    return this.userRepository.find();
+  async findAll(page: number, size: number) {
+    const users = this.userRepository.find({ skip: (page - 1) * size, take: size });
+    return users;
   }
 
   async findOne(id: string) {

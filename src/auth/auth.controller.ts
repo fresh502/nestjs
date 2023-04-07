@@ -26,7 +26,7 @@ export class AuthController {
   @ApiPostResponse(SigninResDto)
   @UseGuards(LocalAuthGuard)
   @Post('signin')
-  async signin(@Request() req, @Body() _: SigninReqDto): Promise<SigninResDto> {
+  async signin(@Body() _: SigninReqDto, @Request() req): Promise<SigninResDto> {
     return this.authService.signin(req.user);
   }
 }

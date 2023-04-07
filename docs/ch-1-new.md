@@ -10,16 +10,20 @@
 - Git, Github
 
 ## Github
+
 - https://github.com/fresh502/nestjs
 
 ## 소스 코드 다운로드
+
 ```bash
 $ git clone https://github.com/fresh502/nestjs.git
 $ npm i
 ```
 
 ## 챕터별 브랜치
+
 - ch-{number}
+
 ```bash
 $ git switch ch-1
 ```
@@ -27,11 +31,14 @@ $ git switch ch-1
 ## 도커
 
 ### 주요 개념
+
 - 참고 자료
-    - https://docs.docker.com/
-    - https://aws.amazon.com/ko/docker/
-- 
+  - https://docs.docker.com/
+  - https://aws.amazon.com/ko/docker/
+-
+
 ### 설치 및 컨테이너 올리기
+
 - https://www.docker.com/
 
 ```bash

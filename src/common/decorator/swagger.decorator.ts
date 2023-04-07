@@ -22,6 +22,7 @@ export const ApiGetItemsResponse = <TModel extends Type<any>>(model: TModel) => 
                 $ref: getSchemaPath(model),
               },
             },
+            required: ['items'],
           },
         ],
       },
