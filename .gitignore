@@ -37,3 +37,6 @@ lerna-debug.log*
 # video local storage
 /video-storage
 *.mp4
+
+# env
+*.env
