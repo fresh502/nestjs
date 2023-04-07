@@ -1,3 +1,8 @@
-import { PageReqDto } from 'src/common/dto/req.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsUUID } from 'class-validator';
 
-export class FindUsersReqDto extends PageReqDto {}
+export class FindUserReqDto {
+  @ApiProperty({ required: true })
+  @IsUUID()
+  id: string;
+}

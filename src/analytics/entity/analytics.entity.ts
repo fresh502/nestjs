@@ -6,8 +6,8 @@ export class Analytics {
   @PrimaryColumn({ type: 'uuid', name: 'video_id' })
   videoId: string;
 
-  @Column({ name: 'view_cnt', default: 0 })
-  viewCnt: number;
+  @Column({ name: 'download_cnt', default: 0 })
+  downCnt: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
