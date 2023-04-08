@@ -14,42 +14,19 @@ export class VideoService {
     @InjectRepository(Video) private videoRepository: Repository<Video>,
   ) {}
 
-  async create(title: string, mimetype: string, extension: string, buffer: Buffer): Promise<void> {
-    const video = await this.videoRepository.create({ title, mimetype });
-    await this.videoRepository.save(video);
-    const filePath = join(process.cwd(), 'video-storage', `${video.id}.${extension}`);
-    await writeFile(filePath, buffer);
+  async create() {
+    return 'create';
   }
 
   async findAll() {
-    const videos = await this.videoRepository.findBy({});
-    return videos;
+    return 'video list';
   }
 
   async findOne(id: string) {
-    const video = await this.videoRepository.findOneBy({ id });
-    if (!video) throw new NotFoundException();
-    return video;
+    return 'video';
   }
 
-  async play(
-    id: string,
-    setFetchDest: 'document' | 'video',
-  ): Promise<{ stream: ReadStream; mimetype: string; size: number }> {
-    const video = await this.videoRepository.findOneBy({ id });
-    if (!video) throw new NotFoundException();
-
-    // todo video로 계속 간다면 좀 더 직관적인 파라미터 사용 및 조사 필요
-    // if (setFetchDest === 'video') {
-    //   await this.analyticsService.addViewCnt(id);
-    // }
-    await this.analyticsService.addViewCnt(id);
-
-    const { mimetype } = video;
-    const extension = mimetype.split('/')[1];
-    const videoPath = join(process.cwd(), 'video-storage', `${id}.${extension}`);
-    const { size } = await stat(videoPath);
-    const stream = createReadStream(videoPath);
-    return { stream, mimetype, size };
+  async play(id: string) {
+    return 'play';
   }
 }
