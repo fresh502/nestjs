@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { VideoService } from './video.service';
 import { CreateVideoReqDto, FindVideoReqDto } from './dto/req.dto';
+import { PageReqDto } from 'src/common/dto/req.dto';
 
 @ApiTags('Video')
-@ApiExtraModels(FindVideoReqDto)
+@ApiExtraModels(FindVideoReqDto, PageReqDto)
 @Controller('api/videos')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
@@ -15,7 +16,7 @@ export class VideoController {
   }
 
   @Get()
-  findAll() {
+  findAll(@Query() { page, size }: PageReqDto) {
     return this.videoService.findAll();
   }
 
