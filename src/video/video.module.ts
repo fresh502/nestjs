@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AnalyticsModule } from 'src/analytics/analytics.module';
 import { Video } from './entity/video.entity';
 import { VideoController } from './video.controller';
 import { VideoService } from './video.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Video]), AnalyticsModule],
+  imports: [TypeOrmModule.forFeature([Video])],
   controllers: [VideoController],
   providers: [VideoService],
 })

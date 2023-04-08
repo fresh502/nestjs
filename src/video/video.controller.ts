@@ -8,7 +8,7 @@ export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
   @Post()
-  create() {
+  upload() {
     return this.videoService.create();
   }
 
@@ -22,8 +22,8 @@ export class VideoController {
     return this.videoService.findOne(id);
   }
 
-  @Get(':id/play')
-  async play(@Param('id') id: string) {
-    return this.videoService.play(id);
+  @Get(':id/download')
+  async download(@Param('id') id: string) {
+    return this.videoService.download(id);
   }
 }

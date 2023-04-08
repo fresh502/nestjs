@@ -18,10 +18,10 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
       logging: true,
     }),
+    AuthModule,
+    UserModule,
     VideoModule,
     AnalyticsModule,
-    UserModule,
-    AuthModule,
   ],
 })
 export class AppModule {}

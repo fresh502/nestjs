@@ -1,18 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { createReadStream, ReadStream } from 'node:fs';
-import { stat, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { AnalyticsService } from 'src/analytics/analytics.service';
 import { Repository } from 'typeorm';
 import { Video } from './entity/video.entity';
 
 @Injectable()
 export class VideoService {
-  constructor(
-    private analyticsService: AnalyticsService,
-    @InjectRepository(Video) private videoRepository: Repository<Video>,
-  ) {}
+  constructor(@InjectRepository(Video) private videoRepository: Repository<Video>) {}
 
   async create() {
     return 'create';
@@ -26,7 +19,7 @@ export class VideoService {
     return 'video';
   }
 
-  async play(id: string) {
+  async download(id: string) {
     return 'play';
   }
 }
