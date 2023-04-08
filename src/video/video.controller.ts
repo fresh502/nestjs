@@ -1,14 +1,16 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { VideoService } from './video.service';
+import { CreateVideoReqDto, FindVideoReqDto } from './dto/req.dto';
 
 @ApiTags('Video')
+@ApiExtraModels(FindVideoReqDto)
 @Controller('api/videos')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
   @Post()
-  upload() {
+  upload(@Body() createVideoReqDto: CreateVideoReqDto) {
     return this.videoService.create();
   }
 
@@ -18,12 +20,12 @@ export class VideoController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param() { id }: FindVideoReqDto) {
     return this.videoService.findOne(id);
   }
 
   @Get(':id/download')
-  async download(@Param('id') id: string) {
+  async download(@Param() { id }: FindVideoReqDto) {
     return this.videoService.download(id);
   }
 }
