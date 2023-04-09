@@ -43,7 +43,7 @@ export class VideoService {
     return video;
   }
 
-  async play(id: string): Promise<{ stream: ReadStream; mimetype: string; size: number }> {
+  async download(id: string): Promise<{ stream: ReadStream; mimetype: string; size: number }> {
     const video = await this.videoRepository.findOneBy({ id });
     if (!video) throw new NotFoundException('No video');
 

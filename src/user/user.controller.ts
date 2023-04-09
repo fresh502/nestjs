@@ -6,14 +6,14 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { FindUserResDto } from './dto/res.dto';
 import { PageReqDto } from 'src/common/dto/req.dto';
 import { FindUserReqDto } from './dto/req.dto';
+import { PageResDto } from 'src/common/dto/res.dto';
 
 @ApiTags('User')
-@ApiExtraModels(FindUserResDto)
+@ApiExtraModels(FindUserResDto, PageResDto, PageReqDto, FindUserReqDto)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetItemsResponse(FindUserResDto)
   @UseGuards(JwtAuthGuard)
@@ -23,7 +23,6 @@ export class UserController {
     return { items: users.map((user) => FindUserResDto.toDto(user)) };
   }
 
-  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetResponse(FindUserResDto)
   @UseGuards(JwtAuthGuard)

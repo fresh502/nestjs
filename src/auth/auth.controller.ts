@@ -1,5 +1,4 @@
-import { Controller, Request, Post, UseGuards, Body, BadRequestException } from '@nestjs/common';
-import { LocalAuthGuard } from './local-auth.guard';
+import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorator/public.decorator';
@@ -24,9 +23,8 @@ export class AuthController {
 
   @Public()
   @ApiPostResponse(SigninResDto)
-  @UseGuards(LocalAuthGuard)
   @Post('signin')
-  async signin(@Body() _: SigninReqDto, @Request() req): Promise<SigninResDto> {
-    return this.authService.signin(req.user);
+  async signin(@Body() { email, password }: SigninReqDto): Promise<SigninResDto> {
+    return this.authService.signin(email, password);
   }
 }

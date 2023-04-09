@@ -27,16 +27,14 @@ import { User } from 'src/common/decorator/user.decorator';
 import { PageReqDto } from 'src/common/dto/req.dto';
 
 @ApiTags('Video')
-@ApiExtraModels(CreateVideoResDto, FindVideoResDto)
+@ApiExtraModels(CreateVideoResDto, FindVideoResDto, FindVideoReqDto)
 @Controller('videos')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
-  @ApiOperation({ description: '비디오 업로드' })
   @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiPostResponse(CreateVideoResDto)
-  @UseGuards(JwtAuthGuard)
   @Post()
   @UseInterceptors(FileInterceptor('video'))
   async create(
@@ -62,35 +60,30 @@ export class VideoController {
     return CreateVideoResDto.toDto(video);
   }
 
-  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetItemsResponse(FindVideoResDto)
   @Get()
-  @UseGuards(JwtAuthGuard)
   async findAll(@Query() { page, size }: PageReqDto): Promise<{ items: FindVideoResDto[] }> {
     const videos = await this.videoService.findAll(page, size);
     return { items: videos.map((video) => FindVideoResDto.toDto(video)) };
   }
 
-  @ApiOperation({})
   @ApiBearerAuth()
   @ApiGetResponse(FindVideoResDto)
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   async findOne(@Param() { id }: FindVideoReqDto) {
     const video = await this.videoService.findOne(id);
     return FindVideoResDto.toDto(video);
   }
 
-  @ApiOperation({})
   @ApiBearerAuth()
-  @Get(':id/play')
+  @Get(':id/download')
   async play(
     // @Headers('Sec-Fetch-Dest') setFetchDest: 'document' | 'video',
     @Param() { id }: FindVideoReqDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<StreamableFile> {
-    const { stream, mimetype, size } = await this.videoService.play(id);
+    const { stream, mimetype, size } = await this.videoService.download(id);
     res.set({
       'Content-Length': size,
       'Content-Type': mimetype,
